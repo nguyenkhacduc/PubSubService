@@ -31,3 +31,6 @@ Input command:
 - print: print all formulas of subscriber.
 - exit
 
+# References
+http://www.code2succeed.com/pub-sub/
+
