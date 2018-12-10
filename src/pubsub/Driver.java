@@ -44,10 +44,22 @@ public class Driver {
             if (command.equalsIgnoreCase("print")){
                 System.out.print("Input operation: ");
                 String operation = bufferedReader.readLine();
-                if (operation.equalsIgnoreCase("plus")) plusSubscriber.printFormula();
-                if (operation.equalsIgnoreCase("minus")) minusSubscriber.printFormula();
-                if (operation.equalsIgnoreCase("multiply")) multiplySubscriber.printFormula();
-                if (operation.equalsIgnoreCase("divide")) divideSubscriber.printFormula();
+                if (operation.equalsIgnoreCase("plus") || operation.equalsIgnoreCase("all")) {
+                    System.out.println("PLUS");
+                    plusSubscriber.printFormula();
+                }
+                if (operation.equalsIgnoreCase("minus") || operation.equalsIgnoreCase("all")){
+                    System.out.println("MINUS");
+                    minusSubscriber.printFormula();
+                }
+                if (operation.equalsIgnoreCase("multiply") || operation.equalsIgnoreCase("all")){
+                    System.out.println("MULTIPLY");
+                    multiplySubscriber.printFormula();
+                }
+                if (operation.equalsIgnoreCase("divide") || operation.equalsIgnoreCase("all")){
+                    System.out.println("DIVIDE");
+                    divideSubscriber.printFormula();
+                }
             }
 
             if (command.equalsIgnoreCase("plus") || command.equalsIgnoreCase("minus")

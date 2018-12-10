@@ -8,7 +8,7 @@ import java.util.*;
 public class PubSubService {
 
     Map<String, Set<Subscriber>> subscribersTopicMap = new HashMap<String, Set<Subscriber>>();
-    Queue<Formula> formulaQueue = new LinkedList<Formula>();
+    List<Formula> formulaQueue = new ArrayList<Formula>();
 
     public void addMessageToQueue(Formula formula) {
         formulaQueue.add(formula);
@@ -38,10 +38,10 @@ public class PubSubService {
     }
 
     public void broadcast(){
-        boolean emptyQueue = true;
+        boolean emptyList = true;
         while (!formulaQueue.isEmpty()){
-            emptyQueue = false;
-            Formula formula = formulaQueue.remove();
+            emptyList = false;
+            Formula formula = formulaQueue.remove(0);
             String topic = formula.getTopic();
 
             Set<Subscriber> subscriberOfTopic = subscribersTopicMap.get(topic);
@@ -52,17 +52,16 @@ public class PubSubService {
             }
         }
 
-        if (emptyQueue){
+        if (emptyList){
             System.out.println("No formulas from publishers to display.");
         }
     }
 
     public void getFormulasForSubscriberTopic(String topic, Subscriber subscriber) {
-        boolean emptyQueue = true;
-        while (!formulaQueue.isEmpty()){
-            emptyQueue = false;
-            Formula formula = formulaQueue.remove();
+        boolean emptyList = true;
+        int index = 0;
 
+        for (Formula formula : formulaQueue){
             if (formula.getTopic().equalsIgnoreCase(topic)){
                 Set<Subscriber> subscribersOfTopic = subscribersTopicMap.get(topic);
 
@@ -73,10 +72,18 @@ public class PubSubService {
                         subscriber.setSubscribeFormulas(subscriberFormulas);
                     }
                 }
+
+                emptyList = false;
+                Collections.swap(formulaQueue, index, formulaQueue.indexOf(formula));
+                index++;
             }
         }
 
-        if (emptyQueue){
+        while (!formulaQueue.isEmpty() && formulaQueue.get(0).getTopic().equalsIgnoreCase(topic)){
+            formulaQueue.remove(0);
+        }
+
+        if (emptyList){
             System.out.println("No formulas from publishers to display.");
         }
     }
