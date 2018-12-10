@@ -42,7 +42,7 @@ public class Driver {
             }
 
             if (command.equalsIgnoreCase("print")){
-                System.out.print("Input operation: ");
+                System.out.print("Input operation (\"ALL\" for print all): ");
                 String operation = bufferedReader.readLine();
                 if (operation.equalsIgnoreCase("plus") || operation.equalsIgnoreCase("all")) {
                     System.out.println("PLUS");
@@ -77,8 +77,8 @@ public class Driver {
                 if (publisher == 3) thirdPublisher.publish(formula, pubSubService);
             }
 
-            if (command.equalsIgnoreCase("transfer queue")){
-                System.out.println("Input subscriber name (\"ALL\" for transfer all): ");
+            if (command.equalsIgnoreCase("get")){
+                System.out.print("Input subscriber name (\"ALL\" for get all): ");
                 String subscriber = bufferedReader.readLine();
                 if (subscriber.equalsIgnoreCase("all")) pubSubService.broadcast();
                 if (subscriber.equalsIgnoreCase("plus")) plusSubscriber.getFormulasForSubscriberTopic(subscriber, pubSubService);
